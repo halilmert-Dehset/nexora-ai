@@ -6,6 +6,8 @@ import { CryptoCalculator } from '@/components/tools/CryptoCalculator';
 import { YoutubeSeoTool } from '@/components/tools/YoutubeSeoTool';
 import { TextSummarizer } from '@/components/tools/TextSummarizer';
 import { AdBanner } from '@/components/AdBanner';
+import { ToolSeoBlock } from '@/components/ToolSeoBlock';
+import { SEO_CONTENT } from '@/lib/seoData';
 import { 
   Sparkles, 
   Calculator, 
@@ -120,6 +122,9 @@ export default function Home() {
 
         {/* High-CTR Ad Placement */}
         <AdBanner slotId="bottom-tool-banner" format="horizontal" />
+
+        {/* Dynamic SEO, How-to & FAQ Block */}
+        <ToolSeoBlock {...SEO_CONTENT[activeTab]} />
 
         {/* Curated High-Converting Affiliate Card (Passive Income) */}
         <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-blue-950/40 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
