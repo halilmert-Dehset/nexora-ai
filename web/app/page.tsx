@@ -149,9 +149,9 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="hover:text-slate-400 cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-slate-400 cursor-pointer">Terms of Service</span>
-            <span className="hover:text-slate-400 cursor-pointer">Advertise with Us</span>
+            <a href="/privacy" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
+            <a href="/contact" className="hover:text-cyan-400 transition-colors">Contact</a>
           </div>
 
           <div>
