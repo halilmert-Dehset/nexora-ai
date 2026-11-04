@@ -3,6 +3,22 @@ import { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://nexora-ai-eosin-three.vercel.app';
 
+  const toolRoutes = [
+    '/tools/qr-code-generator',
+    '/tools/password-generator',
+    '/tools/ai-prompt-enhancer',
+    '/tools/crypto-profit-calculator',
+    '/tools/youtube-seo-tags',
+    '/tools/text-summarizer',
+  ];
+
+  const toolsSitemap = toolRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
+
   return [
     {
       url: baseUrl,
@@ -10,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 1.0,
     },
+    ...toolsSitemap,
     {
       url: `${baseUrl}/privacy`,
       lastModified: new Date(),
