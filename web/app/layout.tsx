@@ -17,7 +17,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* AdSense Script placeholder: replace with your ca-pub-ID when approved */}
+        {/* Google Analytics GA4 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J10BJMF8G3"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-J10BJMF8G3');
+            `,
+          }}
+        />
+        {/* AdSense Script placeholder */}
       </head>
       <body className="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white font-sans antialiased">
         {children}
