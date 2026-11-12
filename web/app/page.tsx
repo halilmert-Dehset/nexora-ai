@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { PromptEnhancer } from '@/components/tools/PromptEnhancer';
 import { CryptoCalculator } from '@/components/tools/CryptoCalculator';
 import { YoutubeSeoTool } from '@/components/tools/YoutubeSeoTool';
@@ -10,8 +11,6 @@ import { PasswordGenerator } from '@/components/tools/PasswordGenerator';
 import { WordCounter } from '@/components/tools/WordCounter';
 import { CaseConverter } from '@/components/tools/CaseConverter';
 import { AdBanner } from '@/components/AdBanner';
-import { ToolSeoBlock } from '@/components/ToolSeoBlock';
-import { SEO_CONTENT } from '@/lib/seoData';
 import { 
   Sparkles, 
   Calculator, 
@@ -22,34 +21,95 @@ import {
   KeyRound,
   Type,
   SpellCheck,
-  ExternalLink
+  ExternalLink,
+  ArrowRight,
+  Shield,
+  Layers
 } from 'lucide-react';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'wordcounter' | 'caseconverter' | 'qrcode' | 'password' | 'prompt' | 'crypto' | 'youtube' | 'summary'>('wordcounter');
 
   const tools = [
-    { id: 'wordcounter', name: 'Word Counter', icon: Type, category: 'Writing', color: 'hover:text-teal-400' },
-    { id: 'caseconverter', name: 'Case Converter', icon: SpellCheck, category: 'Text', color: 'hover:text-pink-400' },
-    { id: 'qrcode', name: 'QR Code Generator', icon: QrCode, category: 'Utilities', color: 'hover:text-cyan-400' },
-    { id: 'password', name: 'Password Generator', icon: KeyRound, category: 'Security', color: 'hover:text-amber-400' },
-    { id: 'prompt', name: 'AI Prompt Enhancer', icon: Sparkles, category: 'AI Tools', color: 'hover:text-blue-400' },
-    { id: 'crypto', name: 'Crypto ROI Calculator', icon: Calculator, category: 'Finance', color: 'hover:text-emerald-400' },
-    { id: 'youtube', name: 'YouTube SEO Tags', icon: Video, category: 'Social Media', color: 'hover:text-rose-400' },
-    { id: 'summary', name: 'Text Summarizer', icon: AlignLeft, category: 'Writing', color: 'hover:text-violet-400' },
+    { 
+      id: 'wordcounter', 
+      slug: 'word-counter', 
+      name: 'Word Counter', 
+      icon: Type, 
+      category: 'Writing',
+      summary: 'Count words, characters, sentences, and estimated reading time in real-time.' 
+    },
+    { 
+      id: 'caseconverter', 
+      slug: 'case-converter', 
+      name: 'Case Converter', 
+      icon: SpellCheck, 
+      category: 'Text',
+      summary: 'Instantly convert text to UPPERCASE, lowercase, Title Case, camelCase, or snake_case.' 
+    },
+    { 
+      id: 'qrcode', 
+      slug: 'qr-code-generator', 
+      name: 'QR Code Generator', 
+      icon: QrCode, 
+      category: 'Utilities',
+      summary: 'Generate permanent, high-resolution QR codes with zero expiration limits.' 
+    },
+    { 
+      id: 'password', 
+      slug: 'password-generator', 
+      name: 'Password Generator', 
+      icon: KeyRound, 
+      category: 'Security',
+      summary: 'Create high-entropy, cryptographically unhackable random passwords locally.' 
+    },
+    { 
+      id: 'prompt', 
+      slug: 'ai-prompt-enhancer', 
+      name: 'AI Prompt Enhancer', 
+      icon: Sparkles, 
+      category: 'AI Tools',
+      summary: 'Engineer structured system prompts for ChatGPT, Claude, and Midjourney.' 
+    },
+    { 
+      id: 'crypto', 
+      slug: 'crypto-profit-calculator', 
+      name: 'Crypto ROI Calculator', 
+      icon: Calculator, 
+      category: 'Finance',
+      summary: 'Calculate profit, net margin, and leverage ROI for spot and futures contracts.' 
+    },
+    { 
+      id: 'youtube', 
+      slug: 'youtube-seo-tags', 
+      name: 'YouTube SEO Tags', 
+      icon: Video, 
+      category: 'Social Media',
+      summary: 'Generate high-CTR click-through titles and algorithmic tags for YouTube videos.' 
+    },
+    { 
+      id: 'summary', 
+      slug: 'text-summarizer', 
+      name: 'Text Summarizer', 
+      icon: AlignLeft, 
+      category: 'Writing',
+      summary: 'Extract executive bullet points and key takeaways from long documentation.' 
+    },
   ];
+
+  const currentTool = tools.find(t => t.id === activeTab) || tools[0];
 
   return (
     <div className="flex-1 flex flex-col">
-      {/* Top Banner Advertisement (High CPM Leaderboard) */}
+      {/* Top Banner Advertisement (Clean Container) */}
       <div className="w-full bg-slate-950 border-b border-slate-900 py-2">
-        <AdBanner slotId="top-leaderboard-banner" format="horizontal" label="Featured Sponsor" />
+        <AdBanner slotId="top-leaderboard-banner" format="horizontal" label="Advertisement" />
       </div>
 
       {/* Header */}
       <header className="border-b border-slate-800 bg-slate-950/70 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20">
               N
             </div>
@@ -61,7 +121,7 @@ export default function Home() {
                 All-in-One Utility Hub
               </span>
             </div>
-          </div>
+          </Link>
 
           <div className="flex items-center gap-4 text-xs font-medium text-slate-400">
             <span className="hidden sm:flex items-center gap-1.5 text-emerald-400">
@@ -85,16 +145,16 @@ export default function Home() {
           Free utilities for creators, students, developers, and entrepreneurs. High speed, client-side encryption, and zero registration required.
         </p>
 
-        {/* Categories / Modern Tool Grid Selector */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 max-w-5xl mx-auto">
+        {/* Categories / Modern Tool Grid Selector with Crawlable Links */}
+        <div id="tools" className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 max-w-5xl mx-auto">
           {tools.map((t) => {
             const Icon = t.icon;
             const isActive = activeTab === t.id;
             return (
-              <button
+              <div
                 key={t.id}
                 onClick={() => setActiveTab(t.id as any)}
-                className={`p-3 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer ${
+                className={`p-3 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer relative group ${
                   isActive
                     ? 'bg-slate-800 border-cyan-500/60 shadow-lg shadow-cyan-500/10 text-white'
                     : 'bg-slate-900/50 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
@@ -102,10 +162,20 @@ export default function Home() {
               >
                 <div className="flex justify-between items-center w-full mb-2">
                   <Icon className={`w-4 h-4 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
-                  <span className="text-[8px] uppercase tracking-wider text-slate-500 font-semibold">{t.category}</span>
+                  <Link
+                    href={`/tools/${t.slug}`}
+                    title={`Open dedicated ${t.name} page`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-slate-500 hover:text-cyan-400 transition-colors p-0.5"
+                  >
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </div>
-                <span className="text-xs font-bold leading-snug">{t.name}</span>
-              </button>
+                <div>
+                  <span className="text-[8px] uppercase tracking-wider text-slate-500 font-semibold block mb-0.5">{t.category}</span>
+                  <span className="text-xs font-bold leading-snug">{t.name}</span>
+                </div>
+              </div>
             );
           })}
         </div>
@@ -122,11 +192,24 @@ export default function Home() {
         {activeTab === 'youtube' && <YoutubeSeoTool />}
         {activeTab === 'summary' && <TextSummarizer />}
 
-        {/* High-CTR Middle Ad Placement */}
+        {/* Clean Ad Placement */}
         <AdBanner slotId="middle-tool-banner" format="horizontal" label="Advertisement" />
 
-        {/* Dynamic SEO, How-to & FAQ Block for High Google Ranking */}
-        <ToolSeoBlock {...SEO_CONTENT[activeTab]} />
+        {/* Short & Unique Hub Preview Card (Eliminates Duplicate Content) */}
+        <div className="mt-8 p-5 rounded-2xl bg-slate-900/40 border border-slate-850 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 mb-1 block">Quick Hub Overview</span>
+            <h3 className="text-sm font-bold text-white">Using {currentTool.name}</h3>
+            <p className="text-xs text-slate-400 mt-1 max-w-xl">{currentTool.summary}</p>
+          </div>
+          <Link
+            href={`/tools/${currentTool.slug}`}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-cyan-200 text-xs font-semibold shrink-0 transition-colors border border-slate-700"
+          >
+            <span>Full Guide & FAQ</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
 
         {/* Curated High-Converting Sponsor / Affiliate Card */}
         <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-blue-950/40 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -146,23 +229,52 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer & SEO Links */}
+      {/* Footer & Comprehensive Site Directory Links */}
       <footer className="mt-20 border-t border-slate-900 py-10 bg-slate-950/50">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-slate-400">NEXORA AI</span>
-            <span>•</span>
-            <span>Automate. Create. Earn.</span>
+        <div className="max-w-6xl mx-auto px-4 space-y-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+            <div>
+              <span className="font-bold text-slate-300 block mb-2">Writing Utilities</span>
+              <ul className="space-y-1.5 text-slate-400">
+                <li><Link href="/tools/word-counter" className="hover:text-cyan-400 transition-colors">Word Counter</Link></li>
+                <li><Link href="/tools/case-converter" className="hover:text-cyan-400 transition-colors">Case Converter</Link></li>
+                <li><Link href="/tools/text-summarizer" className="hover:text-cyan-400 transition-colors">Text Summarizer</Link></li>
+              </ul>
+            </div>
+            <div>
+              <span className="font-bold text-slate-300 block mb-2">Security & Web</span>
+              <ul className="space-y-1.5 text-slate-400">
+                <li><Link href="/tools/password-generator" className="hover:text-cyan-400 transition-colors">Password Generator</Link></li>
+                <li><Link href="/tools/qr-code-generator" className="hover:text-cyan-400 transition-colors">QR Code Generator</Link></li>
+              </ul>
+            </div>
+            <div>
+              <span className="font-bold text-slate-300 block mb-2">AI & Marketing</span>
+              <ul className="space-y-1.5 text-slate-400">
+                <li><Link href="/tools/ai-prompt-enhancer" className="hover:text-cyan-400 transition-colors">AI Prompt Enhancer</Link></li>
+                <li><Link href="/tools/youtube-seo-tags" className="hover:text-cyan-400 transition-colors">YouTube SEO Tags</Link></li>
+                <li><Link href="/tools/crypto-profit-calculator" className="hover:text-cyan-400 transition-colors">Crypto ROI Calculator</Link></li>
+              </ul>
+            </div>
+            <div>
+              <span className="font-bold text-slate-300 block mb-2">Platform & Legal</span>
+              <ul className="space-y-1.5 text-slate-400">
+                <li><Link href="/privacy" className="hover:text-cyan-400 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-cyan-400 transition-colors">Terms of Service</Link></li>
+                <li><Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact Support</Link></li>
+              </ul>
+            </div>
           </div>
 
-          <div className="flex items-center gap-6">
-            <a href="/privacy" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
-            <a href="/terms" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
-            <a href="/contact" className="hover:text-cyan-400 transition-colors">Contact</a>
-          </div>
-
-          <div>
-            © 2026 NEXORA AI. All rights reserved.
+          <div className="pt-6 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-slate-400">NEXORA AI</span>
+              <span>•</span>
+              <span>Automate. Create. Earn.</span>
+            </div>
+            <div>
+              © 2026 NEXORA AI. All rights reserved.
+            </div>
           </div>
         </div>
       </footer>

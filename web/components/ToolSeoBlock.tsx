@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { HelpCircle, ChevronDown, ChevronUp, BookOpen, Lightbulb } from 'lucide-react';
+import { JsonLd } from '@/components/JsonLd';
 
 interface FaqItem {
   question: string;
@@ -29,8 +30,37 @@ export const ToolSeoBlock: React.FC<ToolSeoBlockProps> = ({
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `How to Use ${title}`,
+    "description": description,
+    "step": howToSteps.map((step, idx) => ({
+      "@type": "HowToStep",
+      "position": idx + 1,
+      "text": step
+    }))
+  };
+
   return (
     <div className="mt-12 border-t border-slate-800/80 pt-10 text-slate-300 space-y-8">
+      {/* Dynamic JSON-LD for Search Engine Rich Cards */}
+      <JsonLd data={faqJsonLd} />
+      <JsonLd data={howToJsonLd} />
+
       {/* Comprehensive Overview */}
       <section className="bg-slate-900/40 border border-slate-850 p-6 rounded-2xl">
         <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-3">
