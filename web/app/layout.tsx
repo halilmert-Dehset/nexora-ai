@@ -29,7 +29,12 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* AdSense Script placeholder */}
+        {/* Google AdSense Script */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4721220882387425"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body className="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white font-sans antialiased">
         {children}
