@@ -5,6 +5,54 @@ export const SEO_CONTENT: Record<string, {
   tips: string[];
   faqs: { question: string; answer: string }[];
 }> = {
+  wordcounter: {
+    title: "Free Real-Time Word & Character Counter",
+    description: "An essential writing productivity tool for students, authors, journalists, and content creators. Instantly analyze word counts, character density (with and without spaces), paragraph volume, and estimated reading/speaking times.",
+    howToSteps: [
+      "Type directly or paste your text into the input workspace.",
+      "Metrics update in real-time without requiring any button clicks or page refreshes.",
+      "Review the estimated silent reading time and spoken presentation duration.",
+      "Click 'Copy Text' or 'Clear' when finished."
+    ],
+    tips: [
+      "Most academic essays require standard 250 words per double-spaced page.",
+      "The average person speaks at approximately 125 to 150 words per minute during presentations.",
+      "Google search meta descriptions perform best between 150 to 160 characters."
+    ],
+    faqs: [
+      {
+        question: "Is there a limit on how many words I can paste?",
+        answer: "No. The NEXORA AI Word Counter can handle full-length book manuscripts, master theses, and lengthy legal agreements with zero performance lag."
+      },
+      {
+        question: "Is my text private and secure?",
+        answer: "Yes. All word counting and analytical calculations occur entirely within your local browser memory. No text is ever uploaded or saved to remote databases."
+      }
+    ]
+  },
+
+  caseconverter: {
+    title: "Instant Text Case Converter & Casing Formatter",
+    description: "Cleanly convert any text into sentence case, lowercase, UPPERCASE, Title Case, camelCase, or snake_case in one click. Designed for copywriters, social media managers, and software developers.",
+    howToSteps: [
+      "Paste your text into the text area.",
+      "Click your target transformation button (e.g. UPPER CASE, Title Case, camelCase).",
+      "Your text converts instantly in place.",
+      "Click 'Copy Converted Text' to use in your document or codebase."
+    ],
+    tips: [
+      "Use Title Case for blog headlines, email subjects, and presentation titles for maximum readability.",
+      "camelCase and snake_case are ideal for programming variables, API payloads, and database fields.",
+      "Sentence case is best for repairing accidental CAPS LOCK typing mistakes."
+    ],
+    faqs: [
+      {
+        question: "Can I convert text that contains numbers and special symbols?",
+        answer: "Yes. The converter smartly preserves numbers and punctuation while transforming alphanumeric character cases cleanly."
+      }
+    ]
+  },
+
   qrcode: {
     title: "Free High-Resolution QR Code Generator (Never Expires)",
     description: "Create custom, scan-ready QR codes for website URLs, Wi-Fi passwords, contact cards, text notes, and business links. Generated locally in your browser with zero scan limits, no redirects, and no hidden subscriptions.",
@@ -16,21 +64,12 @@ export const SEO_CONTENT: Record<string, {
     ],
     tips: [
       "Always test your QR code with at least two different smartphone cameras before printing on flyers or packaging.",
-      "Ensure high contrast between the QR pattern and the background for fast scanning in low light.",
-      "For long URLs, consider using clean shortlinks to make the QR matrix less dense and easier to scan from a distance."
+      "Ensure high contrast between the QR pattern and the background for fast scanning in low light."
     ],
     faqs: [
       {
         question: "Do these QR codes expire after 14 or 30 days?",
         answer: "No! Unlike commercial QR services that use expiring redirect links to charge monthly fees, NEXORA AI encodes your exact data directly into the QR matrix (Static QR). It will work forever."
-      },
-      {
-        question: "Is there a limit on how many QR codes I can create?",
-        answer: "There are zero limits. You can generate unlimited QR codes completely free."
-      },
-      {
-        question: "Can I use these QR codes for commercial products and menus?",
-        answer: "Yes, all generated QR codes are 100% royalty-free for personal and commercial use."
       }
     ]
   },
@@ -42,41 +81,35 @@ export const SEO_CONTENT: Record<string, {
       "Select your target password length using the intuitive slider (we recommend 16+ characters).",
       "Toggle character sets (Uppercase, Lowercase, Numbers, and Special Symbols).",
       "Review the real-time Security Entropy meter.",
-      "Click 'Copy' to securely copy your new password without it ever touching a remote server."
+      "Click 'Copy' to securely copy your new password."
     ],
     tips: [
       "A 16-character password with mixed symbols takes modern quantum/GPU clusters trillions of years to brute force.",
-      "Never reuse the same password across multiple platforms, especially primary email and financial accounts.",
-      "Store your generated passwords inside an encrypted password manager (like Bitwarden or 1Password)."
+      "Never reuse the same password across multiple platforms."
     ],
     faqs: [
       {
         question: "Are generated passwords sent to your server or logged?",
-        answer: "Never. Passwords are generated strictly client-side using JavaScript's window.crypto.getRandomValues(). No network requests are made, guaranteeing zero server-side exposure."
-      },
-      {
-        question: "What makes a password truly secure?",
-        answer: "True security comes from length and high mathematical entropy (unpredictability). Avoid using dictionary words, pet names, or birth years."
+        answer: "Never. Passwords are generated strictly client-side using JavaScript's window.crypto.getRandomValues(). No network requests are made."
       }
     ]
   },
 
   prompt: {
     title: "AI Prompt Enhancer & Master Prompt Architecture",
-    description: "The NEXORA AI Prompt Enhancer is a free utility designed to transform vague, single-line inputs into rigorous, high-yield system prompts. Designed for LLMs including OpenAI ChatGPT (GPT-4o), Anthropic Claude 3.5 Sonnet, and Midjourney v6.",
+    description: "Transform vague, single-line inputs into rigorous, high-yield system prompts for ChatGPT (GPT-4o), Claude 3.5 Sonnet, and Midjourney.",
     howToSteps: [
       "Select your target AI persona (e.g. Senior Software Engineer, Copywriter, Trader).",
-      "Choose the desired tone and delivery style to eliminate typical conversational AI filler.",
+      "Choose the desired tone and delivery style.",
       "Enter your raw core concept or command into the input box.",
       "Click 'Enhance Prompt' and instantly copy the engineered master prompt."
     ],
     tips: [
-      "Always define clear constraints: Tell the AI what NOT to do to save tokens and prevent common hallucinations.",
-      "Few-shot examples increase output accuracy by over 40% when prompting for structured data or code."
+      "Always define clear constraints: Tell the AI what NOT to do to save tokens and prevent common hallucinations."
     ],
     faqs: [
       {
-        question: "Why should I use structured prompting instead of simple questions?",
+        question: "Why should I use structured prompting?",
         answer: "A structured prompt provides deep context and specific behavioral guardrails, resulting in significantly higher quality, actionable code, and zero conversational fluff."
       }
     ]
@@ -84,16 +117,15 @@ export const SEO_CONTENT: Record<string, {
 
   crypto: {
     title: "Cryptocurrency Profit, Loss & Leverage ROI Calculator",
-    description: "Accurately compute net returns, target exits, and Return on Equity (ROE) across spot and leveraged futures positions. Built for traders on Binance, Bybit, OKX, and Coinbase.",
+    description: "Accurately compute net returns, target exits, and Return on Equity (ROE) across spot and leveraged futures positions for Binance, Bybit, and OKX.",
     howToSteps: [
       "Select whether your trade is a LONG (Buy) or SHORT (Sell) position.",
       "Enter your specific entry price and your projected take-profit exit price.",
-      "Input your base collateral (investment margin amount in USD/USDT).",
-      "Choose your leverage multiplier and review your real-time Net Profit and ROI percentage."
+      "Input your base collateral and choose your leverage multiplier.",
+      "Review your real-time Net Profit and ROI percentage."
     ],
     tips: [
-      "Always account for funding rates and exchange taker fees when trading on 10x leverage or higher.",
-      "Remember that 10x leverage means a 10% adverse price move results in total margin liquidation."
+      "Always account for funding rates and exchange taker fees when trading on 10x leverage or higher."
     ],
     faqs: [
       {
@@ -108,12 +140,11 @@ export const SEO_CONTENT: Record<string, {
     description: "Maximize your video's search ranking and Click-Through Rate (CTR) using our algorithmic title and tag generator.",
     howToSteps: [
       "Enter your primary video keyword or topic into the search bar.",
-      "Select your content niche (Tech, Finance, Gaming, Education, etc.).",
-      "Click 'Generate Viral SEO Bundle' and copy the formatted comma-separated list directly."
+      "Select your content niche and click 'Generate Viral SEO Bundle'.",
+      "Click 'Copy All Tags' to paste into YouTube Studio."
     ],
     tips: [
-      "Place your main target keyword within the first 30 characters of your YouTube video title.",
-      "Keep video titles under 60 characters so they don't get truncated on mobile screens."
+      "Place your main target keyword within the first 30 characters of your YouTube video title."
     ],
     faqs: [
       {
@@ -132,7 +163,7 @@ export const SEO_CONTENT: Record<string, {
       "Review your word metrics and copy the key takeaway points."
     ],
     tips: [
-      "Use the reading time metric to optimize blog posts and newsletter articles for reader attention spans."
+      "Use the reading time metric to optimize blog posts and newsletter articles."
     ],
     faqs: [
       {

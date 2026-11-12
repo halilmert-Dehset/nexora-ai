@@ -4,6 +4,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://nexora-ai-eosin-three.vercel.app';
 
   const toolRoutes = [
+    '/tools/word-counter',
+    '/tools/case-converter',
     '/tools/qr-code-generator',
     '/tools/password-generator',
     '/tools/ai-prompt-enhancer',

@@ -7,6 +7,8 @@ import { YoutubeSeoTool } from '@/components/tools/YoutubeSeoTool';
 import { TextSummarizer } from '@/components/tools/TextSummarizer';
 import { QrCodeGenerator } from '@/components/tools/QrCodeGenerator';
 import { PasswordGenerator } from '@/components/tools/PasswordGenerator';
+import { WordCounter } from '@/components/tools/WordCounter';
+import { CaseConverter } from '@/components/tools/CaseConverter';
 import { AdBanner } from '@/components/AdBanner';
 import { ToolSeoBlock } from '@/components/ToolSeoBlock';
 import { SEO_CONTENT } from '@/lib/seoData';
@@ -18,15 +20,17 @@ import {
   Zap, 
   QrCode, 
   KeyRound,
-  ExternalLink,
-  Shield,
-  Layers
+  Type,
+  SpellCheck,
+  ExternalLink
 } from 'lucide-react';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'qrcode' | 'password' | 'prompt' | 'crypto' | 'youtube' | 'summary'>('qrcode');
+  const [activeTab, setActiveTab] = useState<'wordcounter' | 'caseconverter' | 'qrcode' | 'password' | 'prompt' | 'crypto' | 'youtube' | 'summary'>('wordcounter');
 
   const tools = [
+    { id: 'wordcounter', name: 'Word Counter', icon: Type, category: 'Writing', color: 'hover:text-teal-400' },
+    { id: 'caseconverter', name: 'Case Converter', icon: SpellCheck, category: 'Text', color: 'hover:text-pink-400' },
     { id: 'qrcode', name: 'QR Code Generator', icon: QrCode, category: 'Utilities', color: 'hover:text-cyan-400' },
     { id: 'password', name: 'Password Generator', icon: KeyRound, category: 'Security', color: 'hover:text-amber-400' },
     { id: 'prompt', name: 'AI Prompt Enhancer', icon: Sparkles, category: 'AI Tools', color: 'hover:text-blue-400' },
@@ -62,7 +66,7 @@ export default function Home() {
           <div className="flex items-center gap-4 text-xs font-medium text-slate-400">
             <span className="hidden sm:flex items-center gap-1.5 text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              6 Free Online Tools (No Sign-up)
+              8 Free Online Tools (No Sign-up)
             </span>
           </div>
         </div>
@@ -82,7 +86,7 @@ export default function Home() {
         </p>
 
         {/* Categories / Modern Tool Grid Selector */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 max-w-5xl mx-auto">
           {tools.map((t) => {
             const Icon = t.icon;
             const isActive = activeTab === t.id;
@@ -98,7 +102,7 @@ export default function Home() {
               >
                 <div className="flex justify-between items-center w-full mb-2">
                   <Icon className={`w-4 h-4 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
-                  <span className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold">{t.category}</span>
+                  <span className="text-[8px] uppercase tracking-wider text-slate-500 font-semibold">{t.category}</span>
                 </div>
                 <span className="text-xs font-bold leading-snug">{t.name}</span>
               </button>
@@ -109,6 +113,8 @@ export default function Home() {
 
       {/* Main Tool Workspace */}
       <main className="max-w-4xl mx-auto px-4 w-full flex-1">
+        {activeTab === 'wordcounter' && <WordCounter />}
+        {activeTab === 'caseconverter' && <CaseConverter />}
         {activeTab === 'qrcode' && <QrCodeGenerator />}
         {activeTab === 'password' && <PasswordGenerator />}
         {activeTab === 'prompt' && <PromptEnhancer />}
@@ -125,12 +131,12 @@ export default function Home() {
         {/* Curated High-Converting Sponsor / Affiliate Card */}
         <div className="mt-10 p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-blue-950/40 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 mb-1 block">Recommended Security Tool</span>
-            <h4 className="text-white font-bold text-base">Protect Your Passwords with 256-bit AES Vault</h4>
-            <p className="text-xs text-slate-400 max-w-lg mt-1">Safeguard your accounts, credit cards, and crypto keys across all devices with zero-knowledge encryption.</p>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 mb-1 block">Recommended Writing Assistant</span>
+            <h4 className="text-white font-bold text-base">Write 10x Faster with AI Productivity Tools</h4>
+            <p className="text-xs text-slate-400 max-w-lg mt-1">Supercharge your essays, email campaigns, and code comments with seamless automated grammar and style suggestions.</p>
           </div>
           <a
-            href="https://bitwarden.com"
+            href="https://grammarly.com"
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2.5 rounded-xl bg-white text-slate-950 hover:bg-slate-200 text-xs font-bold shrink-0 flex items-center gap-1.5 transition-all shadow-md"
