@@ -1,9 +1,11 @@
 import { MetadataRoute } from 'next';
+import { ALL_PSEO_PAGES } from '@/lib/pseo/wave1Data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://nexora-ai-eosin-three.vercel.app';
 
-  const toolRoutes = [
+  // 8 Core Primary Tools
+  const coreToolRoutes = [
     '/tools/word-counter',
     '/tools/case-converter',
     '/tools/qr-code-generator',
@@ -14,11 +16,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/text-summarizer',
   ];
 
-  const toolsSitemap = toolRoutes.map((route) => ({
+  const toolsSitemap = coreToolRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.9,
+  }));
+
+  // Programmatic SEO Pages (Wave 1: 6 High-Quality Specialized Tools)
+  const pseoSitemap = ALL_PSEO_PAGES.map((page) => ({
+    url: page.canonicalUrl,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
   }));
 
   return [
@@ -29,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     ...toolsSitemap,
+    ...pseoSitemap,
     {
       url: `${baseUrl}/privacy`,
       lastModified: new Date(),
