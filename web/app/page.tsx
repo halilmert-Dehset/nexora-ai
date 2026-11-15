@@ -24,7 +24,8 @@ import {
   ExternalLink,
   ArrowRight,
   Shield,
-  Layers
+  Layers,
+  ChevronRight
 } from 'lucide-react';
 
 export default function Home() {
@@ -37,7 +38,13 @@ export default function Home() {
       name: 'Word Counter', 
       icon: Type, 
       category: 'Writing',
-      summary: 'Count words, characters, sentences, and estimated reading time in real-time.' 
+      summary: 'Count words, characters, sentences, and estimated reading time in real-time.',
+      subtools: [
+        { name: 'Meta Description Counter', href: '/tools/word-counter/meta-description-counter' },
+        { name: 'Reading Time Calculator', href: '/tools/word-counter/reading-time-calculator' },
+        { name: 'College Essay Word Counter', href: '/tools/word-counter/college-essays' },
+        { name: 'Essay Word Counter', href: '/tools/word-counter/for-essays' },
+      ]
     },
     { 
       id: 'caseconverter', 
@@ -45,7 +52,11 @@ export default function Home() {
       name: 'Case Converter', 
       icon: SpellCheck, 
       category: 'Text',
-      summary: 'Instantly convert text to UPPERCASE, lowercase, Title Case, camelCase, or snake_case.' 
+      summary: 'Instantly convert text to UPPERCASE, lowercase, Title Case, camelCase, or snake_case.',
+      subtools: [
+        { name: 'Title Case Converter', href: '/tools/case-converter/title-case-converter' },
+        { name: 'Sentence Case Converter', href: '/tools/case-converter/sentence-case-converter' },
+      ]
     },
     { 
       id: 'qrcode', 
@@ -100,89 +111,87 @@ export default function Home() {
   const currentTool = tools.find(t => t.id === activeTab) || tools[0];
 
   return (
-    <div className="flex-1 flex flex-col">
-      {/* Top Banner Advertisement (Clean Container) */}
-      <div className="w-full bg-slate-950 border-b border-slate-900 py-2">
-        <AdBanner slotId="top-leaderboard-banner" format="horizontal" label="Advertisement" />
-      </div>
-
-      {/* Header */}
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black">
+      {/* Dynamic Header */}
       <header className="border-b border-slate-800 bg-slate-950/70 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20">
-              N
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+              <Zap className="w-5 h-5 text-white" />
             </div>
             <div>
-              <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent">
-                NEXORA <span className="text-cyan-400">AI</span>
+              <span className="font-black text-lg tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
+                NEXORA <span className="text-cyan-400 font-normal">AI</span>
               </span>
-              <span className="hidden sm:inline-block ml-2 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                All-in-One Utility Hub
-              </span>
+              <span className="text-[10px] text-cyan-400/80 block -mt-1 font-mono tracking-widest uppercase">Tool Engine v2.0</span>
             </div>
-          </Link>
+          </div>
 
-          <div className="flex items-center gap-4 text-xs font-medium text-slate-400">
-            <span className="hidden sm:flex items-center gap-1.5 text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              8 Free Online Tools (No Sign-up)
-            </span>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-2 text-xs text-slate-400 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              8 Free Core Tools Active
+            </div>
+            <Link 
+              href="#tools" 
+              className="text-xs font-semibold px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 hover:text-white transition-all"
+            >
+              Directory
+            </Link>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-10 px-4 text-center max-w-4xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-300 mb-4">
-          <Zap className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Privacy-First. 100% Free Forever. Zero Tracking.</span>
-        </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 leading-tight">
-          Every Smart Tool You Need, <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-amber-300 bg-clip-text text-transparent">In One Fast Place</span>
-        </h1>
-        <p className="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto mb-8">
-          Free utilities for creators, students, developers, and entrepreneurs. High speed, client-side encryption, and zero registration required.
-        </p>
-
-        {/* Categories / Modern Tool Grid Selector with Crawlable Links */}
-        <div id="tools" className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 max-w-5xl mx-auto">
-          {tools.map((t) => {
-            const Icon = t.icon;
-            const isActive = activeTab === t.id;
-            return (
-              <div
-                key={t.id}
-                onClick={() => setActiveTab(t.id as any)}
-                className={`p-3 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer relative group ${
-                  isActive
-                    ? 'bg-slate-800 border-cyan-500/60 shadow-lg shadow-cyan-500/10 text-white'
-                    : 'bg-slate-900/50 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
-                }`}
-              >
-                <div className="flex justify-between items-center w-full mb-2">
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
-                  <Link
-                    href={`/tools/${t.slug}`}
-                    title={`Open dedicated ${t.name} page`}
-                    onClick={(e) => e.stopPropagation()}
-                    className="text-slate-500 hover:text-cyan-400 transition-colors p-0.5"
-                  >
-                    <ArrowRight className="w-3 h-3" />
-                  </Link>
-                </div>
-                <div>
-                  <span className="text-[8px] uppercase tracking-wider text-slate-500 font-semibold block mb-0.5">{t.category}</span>
-                  <span className="text-xs font-bold leading-snug">{t.name}</span>
-                </div>
-              </div>
-            );
-          })}
+      <section className="relative overflow-hidden pt-12 pb-8 border-b border-slate-900">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-slate-950/0 to-transparent pointer-events-none"></div>
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-800/40 text-[11px] text-cyan-400 font-medium mb-4">
+            <Shield className="w-3.5 h-3.5" />
+            100% Client-Side Privacy • Zero Sign-Up Required
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+            Precision Web Utilities & <br className="hidden sm:inline" />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500">
+              Content Productivity Tools
+            </span>
+          </h1>
+          <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Free, privacy-first web utilities built for creators, marketers, and developers. No character caps, zero subscriptions, and instant browser processing.
+          </p>
         </div>
       </section>
 
-      {/* Main Tool Workspace */}
-      <main className="max-w-4xl mx-auto px-4 w-full flex-1">
+      {/* Clean Ad Placement */}
+      <div className="max-w-4xl mx-auto px-4 mt-6 w-full">
+        <AdBanner slotId="top-leaderboard-banner" format="horizontal" label="Advertisement" />
+      </div>
+
+      {/* Main Tool Interface */}
+      <main className="max-w-4xl mx-auto px-4 py-6 w-full flex-1" id="tools">
+        {/* Modern Filter / Tab Navigation */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar scroll-smooth">
+          {tools.map(tool => {
+            const Icon = tool.icon;
+            const isActive = activeTab === tool.id;
+            return (
+              <button
+                key={tool.id}
+                onClick={() => setActiveTab(tool.id as any)}
+                className={`flex items-center gap-2 py-2.5 px-4 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                  isActive 
+                    ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25 scale-[1.02]' 
+                    : 'bg-slate-900/80 text-slate-400 hover:text-slate-200 hover:bg-slate-850 border border-slate-800'
+                }`}
+              >
+                <Icon className={`w-4 h-4 ${isActive ? 'text-slate-950' : 'text-slate-400'}`} />
+                <span>{tool.name}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Active Tool Viewport */}
         {activeTab === 'wordcounter' && <WordCounter />}
         {activeTab === 'caseconverter' && <CaseConverter />}
         {activeTab === 'qrcode' && <QrCodeGenerator />}
@@ -195,20 +204,43 @@ export default function Home() {
         {/* Clean Ad Placement */}
         <AdBanner slotId="middle-tool-banner" format="horizontal" label="Advertisement" />
 
-        {/* Short & Unique Hub Preview Card (Eliminates Duplicate Content) */}
-        <div className="mt-8 p-5 rounded-2xl bg-slate-900/40 border border-slate-850 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 mb-1 block">Quick Hub Overview</span>
-            <h3 className="text-sm font-bold text-white">Using {currentTool.name}</h3>
-            <p className="text-xs text-slate-400 mt-1 max-w-xl">{currentTool.summary}</p>
+        {/* Short & Unique Hub Preview Card with Natural Sub-Tool Links */}
+        <div className="mt-8 p-5 rounded-2xl bg-slate-900/40 border border-slate-850 flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 mb-1 block">Quick Hub Overview</span>
+              <h3 className="text-sm font-bold text-white">Using {currentTool.name}</h3>
+              <p className="text-xs text-slate-400 mt-1 max-w-xl">{currentTool.summary}</p>
+            </div>
+            <Link
+              href={`/tools/${currentTool.slug}`}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-cyan-200 text-xs font-semibold shrink-0 transition-colors border border-slate-700"
+            >
+              <span>Full Guide & FAQ</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
-          <Link
-            href={`/tools/${currentTool.slug}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-cyan-200 text-xs font-semibold shrink-0 transition-colors border border-slate-700"
-          >
-            <span>Full Guide & FAQ</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+
+          {/* Natural HTML Links for Specialized Child Tools */}
+          {currentTool.subtools && currentTool.subtools.length > 0 && (
+            <div className="pt-3 border-t border-slate-800/80">
+              <span className="text-[11px] font-semibold text-slate-400 block mb-2">
+                Specialized {currentTool.name} Utilities:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {currentTool.subtools.map((sub) => (
+                  <Link
+                    key={sub.href}
+                    href={sub.href}
+                    className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 hover:border-cyan-500/50 text-xs text-slate-300 hover:text-cyan-300 transition-colors"
+                  >
+                    <span>{sub.name}</span>
+                    <ChevronRight className="w-3 h-3 text-slate-500" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Curated High-Converting Sponsor / Affiliate Card */}
@@ -237,7 +269,17 @@ export default function Home() {
               <span className="font-bold text-slate-300 block mb-2">Writing Utilities</span>
               <ul className="space-y-1.5 text-slate-400">
                 <li><Link href="/tools/word-counter" className="hover:text-cyan-400 transition-colors">Word Counter</Link></li>
+                <li className="pl-2 border-l border-slate-800 text-[11px] space-y-1">
+                  <div><Link href="/tools/word-counter/for-essays" className="hover:text-cyan-400 text-slate-500 hover:text-slate-300 transition-colors">• Essay Pages</Link></div>
+                  <div><Link href="/tools/word-counter/college-essays" className="hover:text-cyan-400 text-slate-500 hover:text-slate-300 transition-colors">• College Essays</Link></div>
+                  <div><Link href="/tools/word-counter/meta-description-counter" className="hover:text-cyan-400 text-slate-500 hover:text-slate-300 transition-colors">• Meta Descriptions</Link></div>
+                  <div><Link href="/tools/word-counter/reading-time-calculator" className="hover:text-cyan-400 text-slate-500 hover:text-slate-300 transition-colors">• Reading Time</Link></div>
+                </li>
                 <li><Link href="/tools/case-converter" className="hover:text-cyan-400 transition-colors">Case Converter</Link></li>
+                <li className="pl-2 border-l border-slate-800 text-[11px] space-y-1">
+                  <div><Link href="/tools/case-converter/title-case-converter" className="hover:text-cyan-400 text-slate-500 hover:text-slate-300 transition-colors">• Title Case</Link></div>
+                  <div><Link href="/tools/case-converter/sentence-case-converter" className="hover:text-cyan-400 text-slate-500 hover:text-slate-300 transition-colors">• Sentence Case</Link></div>
+                </li>
                 <li><Link href="/tools/text-summarizer" className="hover:text-cyan-400 transition-colors">Text Summarizer</Link></li>
               </ul>
             </div>
